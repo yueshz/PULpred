@@ -1,0 +1,13 @@
+name: pulpred
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.10
+  - mmseqs2      # check_seqid_leakage.py (sequence-identity clustering)
+  - foldseek      # GAG/foldseek_annotate.py (structural annotation)
+  - tmalign       # GAG/foldseek_annotate.py (structure alignment)
+  - diamond       # GAG/annotate_candidates.py (CAZyme exclusion filter)
+  - pip
+  - pip:
+    - -r requirements.txt

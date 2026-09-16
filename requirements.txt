@@ -1,0 +1,16 @@
+# PyTorch CUDA 11.8 build used in development; swap the index/tag for your
+# platform (e.g. plain "torch" + default PyPI index for CPU-only).
+--extra-index-url https://download.pytorch.org/whl/cu118
+torch==2.7.1+cu118
+
+numpy
+pandas
+scipy
+scikit-learn
+joblib
+tqdm
+biopython
+openpyxl
+fair-esm
+transformers
+accelerate

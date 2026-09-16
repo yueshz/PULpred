@@ -1,0 +1,27 @@
+# Data and computed artifacts — large, regenerable or GPU-expensive.
+# See README.md "Data & model availability" for how to obtain/regenerate.
+data/
+checkpoints/
+results/
+PULpredSVM/results/
+PULpredSVM/results_archive/
+ablation/*.npz
+ablation/*.csv
+ablation/*.log
+
+# Run logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Model/result binaries anywhere in the tree
+*.pkl
+*.joblib
+*.pt
+*.npz
+
+# OS
+.DS_Store
