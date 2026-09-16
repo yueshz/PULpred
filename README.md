@@ -54,6 +54,28 @@ splits:
 - LGO (Leave-Genome-Out) CV: GAG AUC drop = **+0.0003** (negligible)
 - SeqID-80% CAZyme GroupKFold: GAG AUC drop = **+0.011** (negligible)
 
+### Case study: a structural hit BLAST alone would have missed
+
+`MGYG000001393_02666` (*Hafnia paralvei*, CGC `MGYG000001393_52|CGC3`) is a
+hypothetical protein in a GAG-scored CGC. Sequence search alone dead-ends on
+it — its top 100 BLAST (nr) hits are all "DUF2264 domain-containing protein,"
+i.e. every close sequence relative is itself functionally uncharacterized, so
+`PULpredSVM/05_blast_consensus.py` tags it `blast_class: dark_matter`.
+
+`PULpredSVM/03_fold_structure.py`'s FoldSeek search tells a different story:
+its predicted structure matches two solved glycosaminoglycan lyase crystal
+structures — **GAGase VII** (PDB `8khw`, TM-score 0.698, RMSD 4.6 Å) and
+**GAGase II** (PDB `8khv`, TM-score 0.664, RMSD 5.0 Å) — at ~10% sequence
+identity, well below anything BLAST would flag. `04_check_active_site.py`
+then checks the residues structurally aligned to each reference's ligand
+contacts and finds the expected polysaccharide-lyase catalytic triad
+(β-elimination base + charge-neutralizing residue + secondary catalytic
+residue) in the right geometry, verdict `beta_elim_likely`.
+
+This is the reason the discovery pipeline doesn't stop at sequence-based
+filtering (`02_filter_diamond.py`): DUF-labeled "dark matter" like this is
+exactly what structural annotation is for.
+
 ---
 
 ## Repository layout
