@@ -11,4 +11,4 @@
 
 cd /work3/zhayu/PULpred
 /zhome/68/5/210030/anaconda3/bin/conda run -p /work3/zhayu/envs/pulpred python -u \
-    embed_dbcanseq_unannotated.py --device cuda --esm_batch 32 --mean_only
+    embeddings/embed_dbcanseq_unannotated.py --device cuda --esm_batch 32 --mean_only

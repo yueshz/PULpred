@@ -65,12 +65,23 @@ PULpred/
 │   ├── 02_filter_diamond.py    #   DIAMOND-vs-CAZyDB exclusion filter
 │   ├── 03_fold_structure.py    #   ESMFold + FoldSeek structural annotation
 │   ├── 04_check_active_site.py #   active-site validation of top hits
-│   └── 05_blast_consensus.py   #   BLAST consensus check
+│   ├── 05_blast_consensus.py   #   BLAST consensus check
+│   ├── run_foldseek_annotate.sh
+│   └── setup_foldseek_db.sh
 │
-├── predict_esm2mean_multitask.py  # core: one-vs-rest multi-task classifier (31 substrate classes)
-├── embed_dbcanseq_unannotated.py  # core (--mean_only): ESM2mean embeddings for the 126k unannotated CGCs
-├── check_seqid_leakage.py         # validation: MMseqs2 + GroupKFold leakage check
-├── check_homology_leakage.py      # validation: Leave-Genome-Out leakage check
+├── multitaskSVM/                 # core: one-vs-rest multi-task classifier (31 substrate classes)
+│   ├── predict_esm2mean_multitask.py
+│   └── run_multitask.sh
+│
+├── embeddings/                   # core (--mean_only): ESM2mean embeddings for the 126k unannotated CGCs
+│   ├── embed_dbcanseq_unannotated.py
+│   └── embed_dbcanseq_unannotated.sh
+│
+├── validation/                   # validation: leakage checks
+│   ├── check_seqid_leakage.py      #   MMseqs2 + GroupKFold leakage check
+│   ├── check_homology_leakage.py   #   Leave-Genome-Out leakage check
+│   ├── run_seqid_leakage.sh
+│   └── run_leakage_check.sh
 │
 ├── ablation/                    # provenance: the ESM2mean-vs-CLS comparison above (completed, not re-run)
 │   ├── step1_embed_variants.py
@@ -81,8 +92,6 @@ PULpred/
 │
 ├── legacy/                      # archived first-gen PULTransformer/PULDB track — see legacy/README.md
 │
-├── run_*.sh, embed_dbcanseq_unannotated.sh, setup_foldseek_db.sh   # LSF (bsub) job scripts for the DTU HPC cluster
-│
 ├── data/          # (gitignored) raw + intermediate data — see "Data & model availability"
 ├── checkpoints/   # (gitignored) model weights
 └── results/       # (gitignored) run outputs
@@ -91,8 +100,8 @@ PULpred/
 `PULpredSVM/01_score_svm.py` is the deliverable, but it isn't
 self-contained: it reads training embeddings from `ablation/` and scoring
 embeddings from `data/dbCAN_seq/embeddings/`, both produced by scripts
-outside `PULpredSVM/`. `predict_esm2mean_multitask.py` is a sibling pipeline at the
-same "core" status, not a dependency of `PULpredSVM/`.
+outside `PULpredSVM/`. `multitaskSVM/predict_esm2mean_multitask.py` is a
+sibling pipeline at the same "core" status, not a dependency of `PULpredSVM/`.
 
 ### Data & model availability
 
@@ -121,7 +130,7 @@ TM-align, DIAMOND) plus everything in `requirements.txt` via pip. The
 
 ### External data setup
 
-- **FoldSeek databases** (PDB + AlphaFold/Swiss-Prot, ~10GB): `bash setup_foldseek_db.sh` (or `bsub < setup_foldseek_db.sh` on an LSF cluster)
+- **FoldSeek databases** (PDB + AlphaFold/Swiss-Prot, ~10GB): `bash PULpredSVM/setup_foldseek_db.sh` (or `bsub < PULpredSVM/setup_foldseek_db.sh` on an LSF cluster)
 - **CAZy DIAMOND database**: see the header of `PULpredSVM/02_filter_diamond.py` for the download + `diamond makedb` command
 - **dbCAN-seq CGC data**: per-genome CGC FASTAs, expected under `data/dbCAN_seq/{HUMAN_GUT,COW_RUMEN,HUMAN_ORAL,MARINE}/`
 
@@ -135,14 +144,14 @@ python PULpredSVM/01_score_svm.py --task gag
 python PULpredSVM/01_score_svm.py --task alginate
 
 # FoldSeek structural annotation of top candidates (GPU)
-bash run_foldseek_annotate.sh
+bash PULpredSVM/run_foldseek_annotate.sh
 
 # Multi-task classifier (31 substrate classes)
-bash run_multitask.sh
+bash multitaskSVM/run_multitask.sh
 
 # Leakage validation
-bash run_seqid_leakage.sh
-bash run_leakage_check.sh
+bash validation/run_seqid_leakage.sh
+bash validation/run_leakage_check.sh
 ```
 
 SVM checkpoints in `PULpredSVM/results/{task}_svm/` are reused across runs; pass

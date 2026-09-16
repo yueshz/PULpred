@@ -17,5 +17,5 @@ export OPENBLAS_NUM_THREADS=8
 export MKL_NUM_THREADS=8
 
 echo "=== [$(date)] Multi-task LinearSVC (31 classes) ==="
-$PY predict_esm2mean_multitask.py --model linear
+$PY multitaskSVM/predict_esm2mean_multitask.py --model linear
 echo "=== [$(date)] Done ==="

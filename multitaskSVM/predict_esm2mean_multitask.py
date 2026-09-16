@@ -15,9 +15,9 @@ Models:
 Usage:
   cd /work3/zhayu/PULpred
   conda run -p /work3/zhayu/envs/pulpred \\
-      python predict_esm2mean_multitask.py                  # linear SVM
-      python predict_esm2mean_multitask.py --model mlp
-      python predict_esm2mean_multitask.py --min_samples 200
+      python multitaskSVM/predict_esm2mean_multitask.py                  # linear SVM
+      python multitaskSVM/predict_esm2mean_multitask.py --model mlp
+      python multitaskSVM/predict_esm2mean_multitask.py --min_samples 200
 """
 
 import argparse

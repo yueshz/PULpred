@@ -13,7 +13,7 @@ Reference: DefensePredictor clustering criteria (30% identity, 80% reciprocal co
 
 Usage:
   cd /work3/zhayu/PULpred
-  conda run -p /work3/zhayu/envs/pulpred python check_seqid_leakage.py [--skip_collect] [--skip_cluster]
+  conda run -p /work3/zhayu/envs/pulpred python validation/check_seqid_leakage.py [--skip_collect] [--skip_cluster]
 """
 
 import argparse

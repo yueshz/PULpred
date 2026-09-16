@@ -17,5 +17,5 @@ export OPENBLAS_NUM_THREADS=8
 export MKL_NUM_THREADS=8
 
 echo "=== [$(date)] Homology leakage check (31 classes, Std-5fold vs LGO) ==="
-$PY check_homology_leakage.py
+$PY validation/check_homology_leakage.py
 echo "=== [$(date)] Done ==="

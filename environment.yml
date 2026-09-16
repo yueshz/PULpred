@@ -4,7 +4,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.10
-  - mmseqs2      # check_seqid_leakage.py (sequence-identity clustering)
+  - mmseqs2      # validation/check_seqid_leakage.py (sequence-identity clustering)
   - foldseek      # PULpredSVM/03_fold_structure.py (structural annotation)
   - tmalign       # PULpredSVM/03_fold_structure.py (structure alignment)
   - diamond       # PULpredSVM/02_filter_diamond.py (CAZyme exclusion filter)

@@ -16,5 +16,5 @@ export OMP_NUM_THREADS=16
 export OPENBLAS_NUM_THREADS=16
 
 echo "=== [$(date)] SeqID leakage check (MMseqs2 30%/80% + GroupKFold) ==="
-$PY check_seqid_leakage.py --threads 16
+$PY validation/check_seqid_leakage.py --threads 16
 echo "=== [$(date)] Done ==="

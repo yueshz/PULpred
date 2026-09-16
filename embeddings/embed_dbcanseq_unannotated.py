@@ -8,7 +8,7 @@ Two modes, selected by --mean_only:
   --mean_only   ACTIVE / production path. Skips PULTransformer entirely
                 (no checkpoint load) and saves ESM2 mean-pooled embeddings
                 only. This is what PULpredSVM/01_score_svm.py and
-                predict_esm2mean_multitask.py actually consume.
+                multitaskSVM/predict_esm2mean_multitask.py actually consume.
                 (This is how embed_dbcanseq_unannotated.sh invokes it.)
   (default)     Legacy path. Also runs the pretrained PULTransformer to
                 produce CLS embeddings — kept only for the archived
@@ -28,7 +28,7 @@ Output:
 Usage:
   cd /work3/zhayu/PULpred
   conda run -p /work3/zhayu/envs/pulpred \\
-      python -u embed_dbcanseq_unannotated.py --device cuda --mean_only
+      python -u embeddings/embed_dbcanseq_unannotated.py --device cuda --mean_only
 """
 
 import argparse
@@ -42,7 +42,7 @@ import torch
 from torch.utils.data import DataLoader, Dataset
 from tqdm import tqdm
 
-sys.path.insert(0, str(Path(__file__).parent))
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from src.model import PULTransformer
 
 ENVIRONMENTS = ["HUMAN_GUT", "COW_RUMEN", "HUMAN_ORAL", "MARINE"]

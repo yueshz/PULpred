@@ -10,8 +10,8 @@ Genome is extracted from CGC ID: "GENOME_X|CGCN" → genome = GENOME_X
 
 Usage:
   cd /work3/zhayu/PULpred
-  conda run -p /work3/zhayu/envs/pulpred python check_homology_leakage.py
-  conda run -p /work3/zhayu/envs/pulpred python check_homology_leakage.py --class gag
+  conda run -p /work3/zhayu/envs/pulpred python validation/check_homology_leakage.py
+  conda run -p /work3/zhayu/envs/pulpred python validation/check_homology_leakage.py --class gag
 """
 
 import argparse

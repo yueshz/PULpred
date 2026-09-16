@@ -31,8 +31,9 @@ CLS approach up to dbCAN-seq and compared it against ESM2mean:
   path the project deliberately dropped.
 
 The unannotated-CGC counterpart of `embed_dbcanseq.py`,
-`embed_dbcanseq_unannotated.py`, is **not** here — it's dual-purpose and
-still active in `--mean_only` mode (see the top-level file's docstring).
+`embeddings/embed_dbcanseq_unannotated.py`, is **not** here — it's
+dual-purpose and still active in `--mean_only` mode (see that file's
+docstring).
 
 The formal, working version of "why ESM2mean over CLS" is `ablation/` at
 the repo root, not this comparison track — that's what the README's
@@ -43,7 +44,7 @@ ablation table is drawn from.
 The ablation in `ablation/` showed ESM2mean embeddings (mean-pooled ESM2 per
 CGC, no learned encoder) outperform the pretrained PULTransformer's CLS
 token on both downstream tasks. Once that was established, every active
-pipeline (`PULpredSVM/`, `predict_esm2mean_multitask.py`) moved to ESM2mean-only
+pipeline (`PULpredSVM/`, `multitaskSVM/`) moved to ESM2mean-only
 and `src/model.py`'s PULTransformer stopped being needed for production
 inference — it only still gets imported here, for regenerating the
 now-archived CLS comparison.
