@@ -1,5 +1,8 @@
 # PULpred
 
+*Gene cluster & protein sequence-informed pipeline for polysaccharide
+utilization locus function prediction, and CAZyme mining.*
+
 PULpred predicts the substrate specificity of Polysaccharide Utilization Loci
 (PULs) in gut and marine bacteria, and discovers novel PULs in unannotated
 metagenome-assembled genomes.
@@ -78,7 +81,7 @@ PULpred/
 │
 ├── legacy/                      # archived first-gen PULTransformer/PULDB track — see legacy/README.md
 │
-├── run_*.sh, setup_foldseek_db.sh   # LSF (bsub) job scripts for the DTU HPC cluster
+├── run_*.sh, embed_dbcanseq_unannotated.sh, setup_foldseek_db.sh   # LSF (bsub) job scripts for the DTU HPC cluster
 │
 ├── data/          # (gitignored) raw + intermediate data — see "Data & model availability"
 ├── checkpoints/   # (gitignored) model weights
